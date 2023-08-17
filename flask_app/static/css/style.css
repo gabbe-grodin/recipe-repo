@@ -1,0 +1,145 @@
+/* 
+RESET
+http://meyerweb.com/eric/tools/css/reset/
+  v2.0 | 20110126
+  License: none (public domain)
+============================
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* 
+RESPONSIVE FONT SIZING
+============================
+*/
+html {
+  font-size: 62.5%;
+}
+body {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 3rem;
+}
+h1 {
+  font-size: 3.5rem;
+  letter-spacing: .18rem;
+}
+.f-small {
+  font-size: 1.36rem;
+}
+
+/* 
+LAYOUT
+============================
+*/
+.container {
+  width: 800px;
+  margin: 0 auto;
+}
+header, nav {
+  display: flex;
+  flex: 1;
+  align-items: baseline;
+  margin: 20px 0;
+}
+nav {
+  justify-content: flex-end;
+}
+nav div {
+  margin-left: 20px;
+}
+.flx {
+  display: flex;
+}
+.col {
+  flex-direction: column;
+}
+.row {
+  flex-direction: row;
+}
+.flx-1 {
+  flex: 1;
+}
+.flx-2 {
+  flex: 2;
+}
+.recipe-form {
+  width: 100%;
+}
+
+/* 
+TABLE
+============================
+*/
+.tableFixHead {
+  margin: 25px 0;
+  overflow-y: auto;
+  height: 250px;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+.tableFixHead::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+.tableFixHead thead th {
+  position: sticky;
+  top: 0px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th,
+td {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+}
+th {
+  background: #eee;
+}
