@@ -3,11 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Update Recipe</title>
-  <link rel="stylesheet" href="/flask_app/static/css/style.css">
+  <title>Edit Recipe</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+  <!-- <link rel="stylesheet" href="/flask_app/static/css/style.css"> -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Belanosima:wght@400;600;700&family=Fuzzy+Bubbles:wght@400;700&family=Mansalva&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
+    <!-- HEADER START -->
     <header>
       <h1>Update Your Recipe</h1>
       <nav>
@@ -19,24 +24,81 @@
         </div>
       </nav>
     </header>
-
-    <main class="flx">
-      <!-- place for form validation alerts -->
+    <!-- HEADER END -->
+    <!-- MAIN START -->
+    <main>
       
+      <!-- place for form validation alerts -->
       <p class="alert">Alert placeholder</p>
-      <form action="" class="recipe-form">
+      
+      <form action="">
         <!-- 3 inputs: name, description, instructions -->
-        <div class="flx-1">
-  
-        </div>
-        <!-- date cooked/made input and under 30 radios -->
-        <div class="flx-2">
-  
-        </div>
-        <input type="submit" value="Submit">
-      </form>
+        <div class="flx col gap-3 pb-20">
+          
+          <div>
+            <label for="recipe_name">Name:
+              <div class="flx">
+                <input type="text" name="recipe_name" placeholder="Name of recipe...">
+              </div>
+            </label>
+          </div>
 
+          <div>
+            <label for="recipe_description">Description:
+            </label>
+            <textarea name="recipe_description" placeholder="Describe your dish..." rows="6" id="recipe_description"></textarea>
+          </div>
+          
+          <div>
+            <label for="recipe_instructions">Instructions:
+            </label>
+            <textarea name="recipe_instructions" placeholder="Type out the steps here..." rows="10" id="recipe_instructions"></textarea>
+          </div>
+          
+        
+          <!-- date cooked/made input and under 30 radios -->
+        
+          
+          <div>
+            <label for="">Date cooked/ made
+              <div>
+                <input type="date" name="date_cooked" id="" value="">
+              </div>
+            </label>
+          </div>
+
+
+
+          
+          <!-- RADIOS START -->
+          <div class="flx col gap-3 align-cent">
+            <label>Under 30 minutes?</label>
+            <div class="flx just-space-center">
+              
+              <div class="flx row">
+                <label for="yes">Yes</label>
+                <input type="radio" name="under_30_min_or_not" id="under_30" value="Yes" class="radio">
+              </div>
+              
+              <div class="flx row">
+                <label for="no">No</label>
+                <input type="radio" name="under_30_min_or_not" id="not_under_30" value="No" class="radio">
+              </div>
+              
+            </div>
+            
+          </div>
+          <!-- RADIO END -->
+
+          <div>
+            <button type="submit">save updates</button>
+          </div>
+
+        </div>
+      </form>
+      <!-- FORM END -->
     </main>
+    <!-- MAIN END -->
   </div>
 </body>
 </html>
