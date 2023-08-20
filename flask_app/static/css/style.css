@@ -83,33 +83,19 @@ font-family: 'Fuzzy Bubbles', cursive;
 font-family: 'Mansalva', cursive;
 font-family: 'Prompt', sans-serif;
 */
-
+input, textarea {
+  font-family: 'Mansalva', cursive;
+}
 input::placeholder, textarea::placeholder {
-  font-family: 'Anybody', cursive;
-  font-family: 'Belanosima', sans-serif;
-  /* font-family: 'Fuzzy Bubbles', cursive;
-  font-family: 'Prompt', sans-serif; */
+  font-family: 'Mansalva', cursive;
   font-size: 2.18rem;
 }
 body {
   font-family: 'Anybody', cursive;
-  font-family: 'Belanosima', sans-serif;
-  font-family: 'Fuzzy Bubbles', cursive;
-  font-family: 'Prompt', sans-serif;
 }
 
-h1, h2, h3, h4 {
-  
-}
 h1 {
-  /* font-family: 'Anybody', cursive;
-  font-family: 'Belanosima', sans-serif;
-  font-family: 'Fuzzy Bubbles', cursive; */
   font-family: 'Mansalva', cursive;
-  /* font-family: 'Prompt', sans-serif; */
-}
-.fuzzbub {
-  font-family: 'Fuzzy Bubbles', cursive;
 }
 h2 {
   font-family: 'Belanosima', sans-serif;
@@ -117,7 +103,10 @@ h2 {
   text-transform: uppercase;
   letter-spacing: .36rem;
 }
+button {
 
+  font-family: 'Anybody', cursive;
+}
 
 /* 
 LAYOUT
@@ -233,10 +222,7 @@ form {
 
 label, input, textarea {
   /* display: block; */
-  font-family: 'Anybody', cursive;
-  font-family: 'Belanosima', sans-serif;
-  font-family: 'Fuzzy Bubbles', cursive;
-  font-family: 'Prompt', sans-serif;width: 100%;
+  width: 100%;
   padding: 0;
   margin: 0;
   border: none;
@@ -259,6 +245,7 @@ input, textarea {
   border-bottom: 3px dashed lightskyblue; 
   font-size: 2.18rem;
   letter-spacing: .18rem;
+
 }
 .radio {
   margin: 0;
@@ -325,17 +312,15 @@ button {
   color: white;
   background: hsl(167, 82%, 15%);
   text-align: center;
-  font-family: 'Belanosima', sans-serif;
-  /* font-family: 'Prompt', sans-serif; */
   text-transform: uppercase;
   word-spacing: 1.1rem;
-  height: 50px;
+  height: 60px;
   width: auto;
-  border-radius: 25px;
+  border-radius: 30px;
   cursor: pointer;
   font-size: 1.9rem;
   letter-spacing: .30rem;
-  font-weight: 500;
+  font-weight: 400;
   box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
   transition: 0.5s;
   margin: 10px;
