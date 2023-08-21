@@ -1,6 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import session, flash
-from flask_app.models import user
+from flask_app.models import user, recipe
 from flask_app import app
 
 
@@ -16,6 +16,7 @@ class Recipe:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
+        self.creator = None
 
     @classmethod
     def create_recipe(cls, form_data):
@@ -35,6 +36,50 @@ class Recipe:
         print("Create recipe method in model", result)
         return result
     
-    # get_one
+    @classmethod
+    def get_one_recipe_by_id_with_user(cls, data):
+        data = {
+            'id': id, 
+            'user_id': recipe.user_id, 
+            'first_name': user.first_name,
+            'last_name': user.last_name}
+        query = """
+        SELECT * FROM recipes
+        LEFT JOIN users
+        ON user_id 
+        WHERE id = %(id)s
+        """
+        result=connectToMySQL(cls.db).query_db(query, data)
+        if result:
+            one_recipe = cls(result[0])
+            return one_recipe
+        else:
+            return False
 
-    # get_all
+    @classmethod
+    def get_all_recipes_with_users(cls):
+        query="""
+        SELECT * FROM recipes
+        LEFT JOIN users
+        ON recipes.user_id = users.id
+        """
+        results=connectToMySQL(cls.db).query_db(query)
+        recipe_creator_list = []
+        # needs instances of recipe and user
+        for row in results:
+            one_recipe = cls(row)
+            user_data = {"id": row["id"],
+                        "first_name": row["first_name"],
+                        "last_name": row["last_name"],
+                        "email": row["email"],
+                        "password": row["password"],
+                        "created_at": row["created_at"],
+                        "updated_at": row["updated_at"]}
+            one_recipe.creator = user.User(user_data)
+            recipe_creator_list.append(one_recipe)
+        return recipe_creator_list
+    
+    # @classmethod
+    # def update_one_recipe_by_id_with_user(cls):
+    #     data = {}
+    #     query =

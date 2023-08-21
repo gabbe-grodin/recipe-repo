@@ -25,7 +25,7 @@ def login():
         return redirect('/')
 
 # table of all users and their recipes
-@app.route('/dashboard')
+@app.route('/all/users')
 def show_all_users_with_recipes():
     if 'user_id' in session:
         logged_in_user = User.get_one_user_by_id(session['user_id'])

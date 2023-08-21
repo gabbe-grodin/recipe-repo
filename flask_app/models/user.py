@@ -72,7 +72,7 @@ class User:
         result = connectToMySQL(cls.db).query_db(query, data)
         if result:
           one_user = cls(result[0])
-          print("User not found.")
+          print("User not gettable.")
           return one_user
         else:
           print("User email not found.")

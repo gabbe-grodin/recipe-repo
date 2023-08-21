@@ -26,27 +26,52 @@ def add_recipe():
     return redirect('/dashboard')
 
 # show one recipe
+# ! does this need to be 'show_one_recipe_with_user'?
 @app.route("/view/recipe/<int:id>")
 def show_one_recipe(id):
     data = {"id": id}
-    one_recipe = Recipe.get_one_recipe_by_id(data)
+    one_recipe = Recipe.get_one_recipe_by_id_with_user(data)
     if one_recipe:
         return render_template('view_recipe.html', recipe = one_recipe)
     else:
         return redirect('dashboard')
     
-# edit recipe
-@app.route("/edit/recipe/form")
-def edit_recipe_form():
+# edit recipe - syntax = 
+@app.route("/edit/recipe/<int:id>")
+def edit_recipe_form(id):
+    # data = {"id": id}
+    # one_recipe = Recipe.get_one_recipe_by_id_with_user(data)
+    # print(one_recipe)
+    # return render_template('edit_recipe.html', recipe = one_recipe)
     pass
 
 # update recipe 
 @app.route("/update/recipe/submission", methods=['POST'])
 def update_recipe_submit():
+    # if Recipe.update_one_recipe_by_id (data) == None:
+        # return redirect("/dashboard")
+    # else:
+        # return redirect(f"/edit/recipe/{request.form['id]}")
     pass
-    return redirect("/view/recipe/<int:id>")
 
-# delete recipe "/delete/recipe"
+# delete recipe 
+# @app.route("/delete/recipe/<int:id>")
+# def delete_one_recipe():
+    # pass
+    # return redirect('/dashboard')
 
+# table of all recipes and their users
+@app.route('/dashboard')
+def show_all_recipes_with_users():
+    
+    if 'user_id' in session:
+        logged_in_user = User.get_one_user_by_id(session['user_id'])
 
-# show all recipes
+        all_recipes_with_users = Recipe.get_all_recipes_with_users()
+        print(all_recipes_with_users)
+        return render_template("dash.html", all_recipes = all_recipes_with_users, logged_in_user = logged_in_user)
+
+        # return render_template("dash.html", logged_in_user = logged_in_user)
+
+    else:
+        return redirect("/")

@@ -46,11 +46,12 @@
             <tr>
               <td>{{ recipe.recipe_name }}</td>
               <td>{{ recipe.under_30 }}</td>
-              <td>{{ recipe.user_id }}</td>
+              <!-- ! Need to print users full name rather than id here... -->
+              <td>{{ recipe.creator.first_name }} {{ recipe.creator.last_name }}</td> 
               <td>
-                <a href="#">view</a>
-                <a href="#">edit</a>
-                <a href="#">delete</a>
+                <a href="/view/recipe/{{ recipe.id }}">view</a>
+                <a href="/edit/recipe/{{ recipe.id }}">edit</a>
+                <a href="/delete/recipe/{{ recipe.id }}">delete</a>
               </td>
             </tr>
             {% endfor %}
