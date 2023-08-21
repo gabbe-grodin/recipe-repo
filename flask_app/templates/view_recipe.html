@@ -16,16 +16,26 @@
       <h1>Welcome, username</h1>
       <nav>
         <div>
-          <a href="#">back to recipes</a>
+          <a href="/dashboard">back to recipes</a>
         </div>
         <div>
-          <a href="#">logout</a>
+          <a href="/logout">logout</a>
         </div>
       </nav>
     </header>
     <main>
-      <h2>Name of Recipe</h2>
-      <h3>Posted by: user</h3>
+      <h2>{{ recipe.recipe_name }}</h2>
+      <h3>Posted by: {{ user.first_name }}</h3>
+        {% if user.recipes[0].id %}
+          {% for recipe in user.recipes %}
+            <div>
+              <p>{{ recipe.recipe_description }}</p>
+              <p>{{ recipe.recipe_instructions }}</p>
+              <p>{{ recipe.recipe_date }}</p>
+              <p>{{ recipe.under_30 }}</p>
+            </div>
+          {% endfor %}
+        {% endif %}
     </main>
   </div>
 </body>

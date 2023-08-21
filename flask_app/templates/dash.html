@@ -16,13 +16,13 @@
   <div class="container">
     <!-- HEADER START -->
     <header>
-      <h1>Welcome, username</h1>
+      <h1>Welcome, {{ session['full_name'] }}</h1>
       <nav>
         <div>
-          <a href="#">+ Create</a>
+          <a href="/add/recipe/form">+ Create</a>
         </div>
         <div>
-          <a href="#">logout</a>
+          <a href="/logout">logout</a>
         </div>
       </nav>
     </header>
@@ -42,54 +42,18 @@
             </tr>
           </thead>
           <tbody>
+            {% for recipe in all_recipes %}
             <tr>
-              <td>1.1</td>
-              <td>2.1</td>
-              <td>1.1</td>
-              <td>2.1</td>
+              <td>{{ recipe.recipe_name }}</td>
+              <td>{{ recipe.under_30 }}</td>
+              <td>{{ recipe.user_id }}</td>
+              <td>
+                <a href="#">view</a>
+                <a href="#">edit</a>
+                <a href="#">delete</a>
+              </td>
             </tr>
-            <tr>
-              <td>1.2</td>
-              <td>2.2</td>
-              <td>1.1</td>
-              <td>2.1</td>
-            </tr>
-            <tr>
-              <td>1.3</td>
-              <td>2.3</td>
-              <td>1.1</td>
-              <td>2.1</td>
-            </tr>
-            <tr>
-              <td>1.4</td>
-              <td>2.4</td>
-              <td>1.1</td>
-              <td>2.1</td>
-            </tr>
-            <tr>
-              <td>1.5</td>
-              <td>2.5</td>
-              <td>1.1</td>
-              <td>2.1</td>
-            </tr>
-            <tr>
-              <td>1.6</td>
-              <td>2.5</td>
-              <td>1.1</td>
-              <td>2.1</td>
-            </tr>
-            <tr>
-              <td>1.7</td>
-              <td>2.5</td>
-              <td>1.1</td>
-              <td>2.1</td>
-            </tr>
-            <tr>
-              <td>1.8</td>
-              <td>2.5</td>
-              <td>1.1</td>
-              <td>2.1</td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
