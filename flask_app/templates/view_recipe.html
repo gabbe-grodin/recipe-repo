@@ -13,7 +13,7 @@
 <body>
   <div class="container">
     <header>
-      <h1>Welcome, username</h1>
+      <h1>Welcome {{ session['full_name'] }}!</h1>
       <nav>
         <div>
           <a href="/dashboard">back to recipes</a>
@@ -23,19 +23,21 @@
         </div>
       </nav>
     </header>
-    <main>
+    <main class="flx col gap-3">
       <h2>{{ recipe.recipe_name }}</h2>
-      <h3>Posted by: {{ user.first_name }}</h3>
-        {% if user.recipes[0].id %}
-          {% for recipe in user.recipes %}
-            <div>
-              <p>{{ recipe.recipe_description }}</p>
-              <p>{{ recipe.recipe_instructions }}</p>
-              <p>{{ recipe.recipe_date }}</p>
-              <p>{{ recipe.under_30 }}</p>
+      <h3>Posted by: <span class="mansalva">{{ recipe.creator.first_name }} {{ recipe.creator.last_name }}</span></h3>
+            <div class="flx col gap-4">
+              <h3>description of recipe:</h3>
+              <p class="mansalva">{{ recipe.recipe_description }}</p>
+              <h3>instructions:</h3>
+              <p class="mansalva">{{ recipe.recipe_instructions }}</p>
+              <h3>made on:</h3>
+              <p class="mansalva">{{ recipe.recipe_date }}</p>
+              <h3>Under 30 minutes?</h3>
+              <p class="mansalva">{{ recipe.under_30 }}</p>
             </div>
-          {% endfor %}
-        {% endif %}
+          
+        
     </main>
   </div>
 </body>

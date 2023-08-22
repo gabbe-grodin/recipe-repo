@@ -83,6 +83,10 @@ font-family: 'Fuzzy Bubbles', cursive;
 font-family: 'Mansalva', cursive;
 font-family: 'Prompt', sans-serif;
 */
+.mansalva {
+  font-family: 'Mansalva', cursive;
+  font-size: 3.18rem;
+}
 input, textarea {
   font-family: 'Mansalva', cursive;
 }
@@ -213,7 +217,9 @@ header a {
   text-decoration: none;
   color: black;
 }
-
+#plus {
+  font-size: 4.36rem;
+}
 
 /* 
 FORMS
@@ -310,7 +316,7 @@ ALERTS
 BUTTONS
 ============================
 */
-button {
+button, .btn {
   color: white;
   background: hsl(167, 48%, 47%);
   text-align: center;

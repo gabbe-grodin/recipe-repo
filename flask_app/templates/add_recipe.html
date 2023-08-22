@@ -14,9 +14,7 @@
   <div class="container">
     <!-- HEADER START -->
     <header>
-     
       <h1>Add your recipe!</h1>
-
       <nav>
         <div>
           <a href="/dashboard">back to recipes</a>
@@ -34,10 +32,7 @@
       <!-- <p class="alert">Alert placeholder</p> -->
       
       <form action="/add/recipe/submission" method="post">
-
-
         <!-- 3 inputs: name, description, instructions -->
-        
         <div class="flx col gap-3 pb-20">
           
           <div>
@@ -67,12 +62,10 @@
           <div>
             <label for="recipe_date">Date cooked/ made
               <div>
-                <input type="date" name="recipe_date" value="">
+                <input type="date" name="recipe_date" value="recipe_date">
               </div>
             </label>
           </div>
-
-
 
           
           <!-- RADIOS START -->
@@ -82,12 +75,12 @@
               
               <div class="flx row">
                 <label for="yes">Yes</label>
-                <input type="radio" name="under_30" id="under_30" value=1 class="radio">
+                <input type="radio" name="under_30" value=1 class="radio">
               </div>
               
               <div class="flx row">
                 <label for="no">No</label>
-                <input type="radio" name="under_30" id="under_30" value=0 class="radio">
+                <input type="radio" name="under_30" value=0 class="radio">
               </div>
               
             </div>
@@ -97,7 +90,7 @@
 
           
           <div>
-            <button type="submit">create recipe</button>
+            <input type="submit" class="btn">create recipe</input>
           </div>
 
         </div>

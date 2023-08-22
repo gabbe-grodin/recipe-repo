@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Recipe</title>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-  <!-- <link rel="stylesheet" href="/flask_app/static/css/style.css"> -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Belanosima:wght@400;600;700&family=Fuzzy+Bubbles:wght@400;700&family=Mansalva&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -36,9 +35,9 @@
         <div class="flx col gap-3 pb-20">
           
           <div>
-            <label for="recipe_name">Name:
+            <label for="recipe_name">Recipe name:
               <div class="flx">
-                <input type="text" name="recipe_name" placeholder="Name of recipe...">
+                <input type="text" name="recipe_name" value="{{ one_recipe.recipe_name }}">
               </div>
             </label>
           </div>
@@ -46,13 +45,13 @@
           <div>
             <label for="recipe_description">Description:
             </label>
-            <textarea name="recipe_description" placeholder="Describe your dish..." rows="6" id="recipe_description"></textarea>
+            <textarea name="recipe_description" rows="10" id="recipe_description">{{ one_recipe.recipe_description }}</textarea>
           </div>
           
           <div>
             <label for="recipe_instructions">Instructions:
             </label>
-            <textarea name="recipe_instructions" placeholder="Type out the steps here..." rows="10" id="recipe_instructions"></textarea>
+            <textarea name="recipe_instructions" rows="10" id="recipe_instructions">{{ one_recipe.recipe_instructions }}</textarea>
           </div>
           
         
@@ -62,36 +61,44 @@
           <div>
             <label for="">Date cooked/ made
               <div>
-                <input type="date" name="date_cooked" id="" value="">
+                <input type="date" name="date_cooked" id="" value="{{ one_recipe.recipe_date }}">
               </div>
             </label>
           </div>
-
-
 
           
           <!-- RADIOS START -->
           <div class="flx col gap-3 align-cent">
             <label>Under 30 minutes?</label>
             <div class="flx just-space-center">
-              
-              <div class="flx row">
-                <label for="yes">Yes</label>
-                <input type="radio" name="under_30_min_or_not" id="under_30" value="Yes" class="radio">
-              </div>
-              
-              <div class="flx row">
-                <label for="no">No</label>
-                <input type="radio" name="under_30_min_or_not" id="not_under_30" value="No" class="radio">
-              </div>
-              
+              {% if one_recipe.under_30 == 1 %}
+                <div class="flx row">
+                  <label for="yes">Yes</label>
+                  <input type="radio" name="under_30_min_or_not" id="under_30" value="1" class="radio" checked>
+                </div>
+                
+                <div class="flx row">
+                  <label for="no">No</label>
+                  <input type="radio" name="under_30_min_or_not" id="not_under_30" value="0" class="radio">
+                </div>
+              {% else %}
+                  <div class="flx row">
+                    <label for="yes">Yes</label>
+                    <input type="radio" name="under_30_min_or_not" id="under_30" value="1" class="radio">
+                  </div>
+                  
+                  <div class="flx row">
+                    <label for="no">No</label>
+                    <input type="radio" name="under_30_min_or_not" id="not_under_30" value="0" class="radio" checked>
+                  </div>
+              {% endif %}
             </div>
             
           </div>
           <!-- RADIO END -->
 
           <div>
-            <button type="submit">save updates</button>
+            <input type="submit" class="btn">save updates</input>
           </div>
 
         </div>
