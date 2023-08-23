@@ -38,11 +38,11 @@ def show_one_recipe_with_user(id):
         return render_template('view_recipe.html', recipe = one_recipe)
     else:
         return redirect('/dashboard')
-    
-# edit recipe - syntax = 
+
+# edit recipe form
 @app.route("/edit/recipe/<int:id>")
 def edit_recipe_form(id):
-    # to get prefilled data into edit form, select something by id then pass into html
+    # to get prefilled data into edit form, select something (in this case a recipe or one_recipe) by id then pass into html
     data = {"id": id}
     one_recipe = Recipe.get_one_recipe_by_id_with_user(data)
     print(one_recipe)
@@ -50,11 +50,9 @@ def edit_recipe_form(id):
     
 # update recipe 
 @app.route("/update/recipe/submission", methods=['POST'])
-def update_recipe_submit(data):
-    if Recipe.update_one_recipe_by_id_with_user(data) == None:
-        return redirect(f"/edit/recipe/{data['id']}")
-    else:
-        return redirect("/dashboard")
+def update_recipe_submit():
+    Recipe.update_one_recipe_by_id_with_user(request.form)
+    return redirect(f"/edit/recipe/{request.form['id']}")
 
 # table of all recipes and their users
 @app.route('/dashboard')

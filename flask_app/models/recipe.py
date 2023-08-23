@@ -87,10 +87,38 @@ class Recipe:
             recipe_creator_list.append(one_recipe)
         return recipe_creator_list
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     # UPDATE
     @classmethod
     def update_one_recipe_by_id_with_user(cls, data):
         recipe_data = {
+                "id": data["id"],
                 "recipe_name": data["recipe_name"],
                 "recipe_description": data["recipe_description"],
                 "recipe_instructions": data["recipe_instructions"],
@@ -99,10 +127,33 @@ class Recipe:
                 "user_id": session["user_id"]}
         query = """
         UPDATE recipes
-        SET recipe_name=%(recipe_name)s, recipe_description=%(recipe_description)s, recipe_instructions=%(recipe_instructions)s, recipe_date=%(recipe_date)s, under_30=%(under_30)s, updated_at=NOW()
+        SET id=%(id)s, recipe_name=%(recipe_name)s, recipe_description=%(recipe_description)s, recipe_instructions=%(recipe_instructions)s, recipe_date=%(recipe_date)s, under_30=%(under_30)s, updated_at=NOW()
         WHERE id = %(id)s
         """
         return connectToMySQL(cls.db).query_db(query, recipe_data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     # DELETE
     @classmethod
