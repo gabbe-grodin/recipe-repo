@@ -58,19 +58,23 @@ html {
   font-size: 62.5%;
 }
 body {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 h3 {
   font-size: 2.5rem;
 }
 h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   text-align: center;
 }
 h1 {
   font-size: 4.5rem;
   letter-spacing: .36rem;
 }
+p {
+  font-size: 2.5rem;
+}
+
 .f-small {
   font-size: 1.36rem;
 }
@@ -89,7 +93,8 @@ font-family: 'Prompt', sans-serif;
   font-family: 'Mansalva', cursive;
   /* font-size: 3.18rem; */
 }
-body {
+body, button, main, form, input, textarea {
+  color: black;
   font-family: 'Courier New', Courier, monospace;
   font-size: 2rem;
   font-weight: 800;
@@ -153,6 +158,9 @@ main{
 FORMS
 ============================
 */
+form{
+  width: 100%;
+}
 label, input, textarea {
   text-align: left;
   align-items: baseline;
@@ -167,9 +175,7 @@ input, textarea {
   padding-left: 20px;
 }
 input, textarea, input::placeholder, textarea::placeholder  {
-  letter-spacing: .18rem;
-  font-family: 'Mansalva', cursive;
-  font-size: 2.18rem;
+  color: black;
 }
 input[type="radio"] {
   margin-top: -4px;
@@ -182,7 +188,7 @@ input[type="radio"] {
   text-align: left;
   box-shadow: 14px 14px 20px #89758f, -10px -10px 20px rgb(241, 232, 255);
   /* background-image: none; */
-  /* background: rgb(255, 255, 255); */
+  background: rgb(223, 235, 237);
 }
 
 
@@ -291,7 +297,6 @@ BUTTONS
 ============================
 */
 button{
-  font-family: 'Prompt', sans-serif;
   background: hsl(167, 100%, 82%);
   text-align: center;
   text-transform: uppercase;
@@ -304,7 +309,7 @@ button{
   font-size: 1.9rem;
   letter-spacing: .30rem;
   font-weight: 700;
-  box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px rgb(197, 188, 188);
+  box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px rgb(237, 230, 230);
   transition: 0.5s;
 }
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Name of Recipe</title>
+  <title>{{ recipe.recipe_name }}</title>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
   <!-- <link rel="stylesheet" href="/flask_app/static/css/style.css"> -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +12,10 @@
 </head>
 <body>
   <div class="container">
+
+
+    <!-- HEADER START -->
+
     <header>
       <h1>Welcome {{ session['first_name'] }}!</h1>
       <nav>
@@ -23,22 +27,53 @@
         </div>
       </nav>
     </header>
+
+    <!-- HEADER END -->
+
+
+    
+    <!-- MAIN START -->
+
     <main class="flx col gap-3">
+
       <h2>{{ recipe.recipe_name }}</h2>
-      <h3>Posted by: <span class="mansalva">{{ recipe.creator.first_name }} {{ recipe.creator.last_name }}</span></h3>
-            <div class="flx col gap-4">
-              <h3>description of recipe:</h3>
-              <p class="mansalva">{{ recipe.recipe_description }}</p>
-              <h3>instructions:</h3>
-              <p class="mansalva">{{ recipe.recipe_instructions }}</p>
-              <h3>made on:</h3>
-              <p class="mansalva">{{ recipe.recipe_date }}</p>
-              <h3>Under 30 minutes?</h3>
-              <p class="mansalva">{{ recipe.under_30 }}</p>
-            </div>
-          
-        
+      
+      <div class="flx row">
+        <h3 class="flx-1" >Posted by: </h3>
+        <p class="flx-3" >{{ recipe.creator.first_name }} {{ recipe.creator.last_name }}</p>
+      </div>
+
+      <div class="flx row">
+        <h3 class="flx-1" >description of recipe: </h3>
+        <p class="flx-3" >{{ recipe.recipe_description }}</p>
+      </div>
+      
+      <div class="flx row">
+        <h3 class="flx-1" >instructions:</h3>
+        <p class="flx-3" >{{ recipe.recipe_instructions }}</p>
+      </div>
+
+      <div class="flx row">
+        <h3 class="flx-1" >made on:</h3>
+        <p class="flx-3" >{{ recipe.recipe_date }}</p>
+      </div>
+
+      <div class="flx row">
+        <h3 class="flx-1" >Under 30 minutes?</h3>
+        {% if recipe.under_30 == 1 %}
+        <p class="flx-3" >Yes.</p>
+        {% else %}
+        <p class="flx-3" >No.</p>
+        {% endif %}
+      </div>
+    
+
     </main>
+
+    <!-- MAIN END -->
+
+
   </div>
+
 </body>
 </html>

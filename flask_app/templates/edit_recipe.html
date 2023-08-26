@@ -11,7 +11,10 @@
 </head>
 <body>
   <div class="container">
+
+
     <!-- HEADER START -->
+
     <header>
       <h1>Update Your Recipe</h1>
       <nav>
@@ -23,91 +26,116 @@
         </div>
       </nav>
     </header>
+
     <!-- HEADER END -->
+
+
+    <!-- FLASH MESSAGES START -->
+
+    <div class="flx col">
+      {% with messages = get_flashed_messages() %}
+          {% if messages %}
+              {% for message in messages %}
+                <p class="alert">{{ message }}</p>
+              {% endfor %}
+          {% endif %}
+      {% endwith %}
+    </div>
+
+    <!-- FLASH MESSAGES END -->
+
+
     <!-- MAIN START -->
+    
     <main>
-      
-      <!-- place for form validation alerts -->
-      <p class="alert">Alert placeholder</p>
-      
-      <form action="/update/recipe/submission" method="post">
-        <!-- 3 inputs: name, description, instructions -->
-        <div class="flx col gap-3 pb-20">
-          
-          <input type="hidden" name="id" value="{{ one_recipe.id }}">
 
-          <div>
-            <label for="recipe_name">Recipe name:
-              <div class="flx">
-                <input type="text" name="recipe_name" value="{{ one_recipe.recipe_name }}">
-              </div>
-            </label>
-          </div>
+      
+      <!-- EDIT FORM START -->
+      
+      <form class="flx col gap-4" action="/update/recipe/submission" method="post">
 
-          <div>
-            <label for="recipe_description">Description:
-            </label>
-            <textarea name="recipe_description" rows="10" id="recipe_description">{{ one_recipe.recipe_description }}</textarea>
-          </div>
-          
-          <div>
-            <label for="recipe_instructions">Instructions:
-            </label>
-            <textarea name="recipe_instructions" rows="10" id="recipe_instructions">{{ one_recipe.recipe_instructions }}</textarea>
-          </div>
-          
+
+        <!-- HIDDEN INPUT -->
         
-          <!-- date cooked/made input and under 30 radios -->
+        <input type="hidden" name="id" value="{{ one_recipe.id }}">
+
+        
+        <div class="flx row">
+          <label class="flx-1" for="recipe_name">Recipe name: </label>
+          <input class="flx-3" type="text" name="recipe_name" value="{{ one_recipe.recipe_name }}">
+        </div>
+          
+        <div class="flx row">
+          <label class="flx-1" for="recipe_description">Description: </label>
+          <textarea class="flx-3" name="recipe_description" rows="10" id="recipe_description">{{ one_recipe.recipe_description }}</textarea>
+        </div>
+        
+        <div class="flx row">
+          <label class="flx-1" for="recipe_instructions">Instructions: </label>
+          <textarea class="flx-3" name="recipe_instructions" rows="10" id="recipe_instructions">{{ one_recipe.recipe_instructions }}</textarea>
+        </div>
+        
+      
+        <!-- date cooked/made input and under 30 radios -->
         
           
-          <div>
-            <label for="recipe_date">Date cooked/ made
-              <div>
-                <input type="date" name="recipe_date" id="recipe_date" value="{{ one_recipe.recipe_date }}">
-              </div>
-            </label>
+          <div class="flx row">
+            <label class="flx-1" for="recipe_date">Date made: </label>
+            <input class="flx-3" type="date" name="recipe_date" id="recipe_date" value="{{ one_recipe.recipe_date }}">
           </div>
 
           
           <!-- RADIOS START -->
-          <div class="flx col gap-3 align-cent">
-            <label>Under 30 minutes?</label>
-            <div class="flx just-space-center">
+
+          <div class="flx">
+            <label class="flx-1">Under 30 minutes?: </label>
+            <div class="flx row flx-3 gap-4">
+
               {% if one_recipe.under_30 == 1 %}
-                <div class="flx row">
+                <div class="radio">
                   <label for="yes">Yes</label>
-                  <input type="radio" name="under_30" id="yes_under_30" value="1" class="radio" checked>
+                  <input type="radio" name="under_30" value="1" checked>
                 </div>
                 
-                <div class="flx row">
+                <div class="radio">
                   <label for="no">No</label>
-                  <input type="radio" name="under_30" id="not_under_30" value="0" class="radio">
+                  <input type="radio" name="under_30" value="0">
                 </div>
+
               {% else %}
-                  <div class="flx row">
-                    <label for="yes">Yes</label>
-                    <input type="radio" name="under_30" id="under_30" value="1" class="radio">
-                  </div>
-                  
-                  <div class="flx row">
-                    <label for="no">No</label>
-                    <input type="radio" name="under_30" id="not_under_30" value="0" class="radio" checked>
-                  </div>
+                <div class="radio">
+                  <label for="yes">Yes</label>
+                  <input type="radio" name="under_30" value="1">
+                </div>
+                
+                <div class="radio">
+                  <label for="no">No</label>
+                  <input type="radio" name="under_30" value="0" checked>
+                </div>
               {% endif %}
             </div>
-            
           </div>
+
           <!-- RADIO END -->
 
+          
+          <!-- SUBMIT BUTTON -->
+
           <div>
-            <input type="submit" class="btn">save updates</input>
+            <button type="submit">update recipe</button>
           </div>
 
         </div>
       </form>
+
       <!-- FORM END -->
+    
+    
     </main>
+    
     <!-- MAIN END -->
+  
+  
   </div>
 </body>
 </html>

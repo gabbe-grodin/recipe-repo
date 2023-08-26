@@ -13,7 +13,10 @@
 
 <body>
   <div class="container">
+
+
     <!-- HEADER START -->
+
     <header>
       <h1>Add your recipe!</h1>
       <nav>
@@ -25,9 +28,12 @@
         </div>
       </nav>
     </header>
+
     <!-- HEADER END -->
 
+
     <!-- FLASH MESSAGES START -->
+
     <div class="flx col">
       {% with messages = get_flashed_messages() %}
           {% if messages %}
@@ -37,11 +43,18 @@
           {% endif %}
       {% endwith %}
     </div>
+
     <!-- FLASH MESSAGES END -->
 
+
     <!-- MAIN START -->
+
+
     <main> 
+
+
       <!-- FORM START -->
+
       <form class="flx col gap-4" action="/add/recipe/submission" method="post">
         <div class="flx row">
             <label class="flx-1" for="recipe_name">Name: </label>
@@ -63,13 +76,15 @@
           <input class="flx-3" type="date" name="recipe_date" value="recipe_date">
         </div>
 
+
         <!-- RADIOS START -->
+
         <div class="flx">
           <label class="flx-1">Under 30 minutes?: </label>
           <div class="flx row flx-3 gap-4">
-            <div class="radi">
+            <div class="radio">
               <label for="yes">Yes</label>
-              <input class="radio" type="radio" name="under_30" value=1>
+              <input type="radio" name="under_30" value=1>
             </div>
           
             <div class="radio">
@@ -77,18 +92,24 @@
               <input type="radio" name="under_30" value=0>
             </div>
           </div>
-          
-          
         </div>
+
         <!-- RADIO END -->
 
+
+        
         <div>
           <button type="submit">create recipe</button>
         </div>
       </form>
+
       <!-- FORM END -->
+
+
     </main>
+
     <!-- MAIN END -->
+
   </div>
   
 </body>
