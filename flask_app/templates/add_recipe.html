@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Belanosima:wght@400;600;700&family=Fuzzy+Bubbles:wght@400;700&family=Mansalva&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <div class="container">
     <!-- HEADER START -->
@@ -25,79 +26,70 @@
       </nav>
     </header>
     <!-- HEADER END -->
+
+    <!-- FLASH MESSAGES START -->
+    <div class="flx col">
+      {% with messages = get_flashed_messages() %}
+          {% if messages %}
+              {% for message in messages %}
+                <p class="alert">{{ message }}</p>
+              {% endfor %}
+          {% endif %}
+      {% endwith %}
+    </div>
+    <!-- FLASH MESSAGES END -->
+
     <!-- MAIN START -->
-    <main>
-      
-      <!-- place for form validation alerts -->
-      <!-- <p class="alert">Alert placeholder</p> -->
-      
-      <form action="/add/recipe/submission" method="post">
-        <!-- 3 inputs: name, description, instructions -->
-        <div class="flx col gap-3 pb-20">
-          
-          <div>
-            <label for="recipe_name">Name:
-              <div>
-                <input type="text" name="recipe_name" value="recipe_name" placeholder="Name of recipe...">
-              </div>
-            </label>
-          </div>
+    <main> 
+      <!-- FORM START -->
+      <form class="flx col gap-4" action="/add/recipe/submission" method="post">
+        <div class="flx row">
+            <label class="flx-1" for="recipe_name">Name: </label>
+            <input class="flx-3" type="text" name="recipe_name" placeholder="your recipe name...">
+        </div>
 
-          <div>
-            <label for="recipe_description">Description:
-            </label>
-            <textarea name="recipe_description" placeholder="Describe your dish..." rows="6" id="recipe_description"></textarea>
-          </div>
+        <div class="flx row">
+          <label class="flx-1" for="recipe_description">Description: </label>
+          <textarea class="flx-3" name="recipe_description" placeholder="describe your dish..." rows="2" id="recipe_description"></textarea>
+        </div>
           
-          <div>
-            <label for="recipe_instructions">Instructions:
-            </label>
-            <textarea name="recipe_instructions" placeholder="Type out the steps here..." rows="10" id="recipe_instructions"></textarea>
-          </div>
-          
+        <div class="flx row">
+          <label class="flx-1" for="recipe_instructions">Instructions: </label>
+          <textarea class="flx-3" name="recipe_instructions" placeholder="Write the steps here..." rows="4" id="recipe_instructions"></textarea>
+        </div>
         
-          <!-- date cooked/made input and under 30 radios -->
-        
-          
-          <div>
-            <label for="recipe_date">Date cooked/ made
-              <div>
-                <input type="date" name="recipe_date" value="recipe_date">
-              </div>
-            </label>
-          </div>
+        <div class="flx row">
+          <label class="flx-1" for="recipe_date">Date made: </label>
+          <input class="flx-3" type="date" name="recipe_date" value="recipe_date">
+        </div>
 
-          
-          <!-- RADIOS START -->
-          <div class="flx col gap-3 align-cent">
-            <label>Under 30 minutes?</label>
-            <div class="flx vert-align-middle">
-              
-              <div class="flx row">
-                <label for="yes">Yes</label>
-                <input type="radio" name="under_30" value=1 class="radio">
-              </div>
-              
-              <div class="flx row">
-                <label for="no">No</label>
-                <input type="radio" name="under_30" value=0 class="radio">
-              </div>
-              
+        <!-- RADIOS START -->
+        <div class="flx">
+          <label class="flx-1">Under 30 minutes?: </label>
+          <div class="flx row flx-3 gap-4">
+            <div class="radi">
+              <label for="yes">Yes</label>
+              <input class="radio" type="radio" name="under_30" value=1>
             </div>
-            
-          </div>
-          <!-- RADIO END -->
-
           
-          <div>
-            <input type="submit" class="btn">create recipe</input>
+            <div class="radio">
+              <label for="no">No</label>
+              <input type="radio" name="under_30" value=0>
+            </div>
           </div>
+          
+          
+        </div>
+        <!-- RADIO END -->
 
+        <div>
+          <button type="submit">create recipe</button>
         </div>
       </form>
       <!-- FORM END -->
     </main>
     <!-- MAIN END -->
   </div>
+  
 </body>
 </html>

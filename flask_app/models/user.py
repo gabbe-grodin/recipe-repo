@@ -39,7 +39,6 @@ class User:
 
     @classmethod
     def get_one_user_by_id(cls, data):
-
         query = """
         SELECT * FROM users
         WHERE id = %(id)s
@@ -55,24 +54,34 @@ class User:
     def user_validations(form_data):
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
         is_valid = True
-        if len(form_data['first_name']) < 2:
+        if len(form_data['first_name']) > 0 and len(form_data['first_name']) <= 2:
             flash("First name must be at least 2 characters.")
             is_valid = False
-        if len(form_data['last_name']) < 2:
+        if len(form_data['first_name']) <= 0:
+            flash("Cannot leave first name field blank. ")
+            is_valid = False
+        if len(form_data['last_name']) > 0 and len(form_data['last_name']) <= 2:
             flash("Last name must be at least 2 characters.")
             is_valid = False
-        if not EMAIL_REGEX.match(form_data['email']):
+        if len(form_data['last_name']) <= 0:
+            flash("Cannot leave last name field blank.")
+        if not EMAIL_REGEX.match(form_data['email']) and len(form_data['email']) > 0:
             flash("Email must be in correct format.")
+            is_valid = False
+        if len(form_data['email']) <= 0:
+            flash("Cannot leave email field blank.")
             is_valid = False
         if User.get_one_user_by_email(form_data['email']):
             flash("Email is already in our system. Please try again.")
             is_valid = False
+        if len(form_data['password']) > 0 and len(form_data['password']) <= 8:
+            flash("Password must be at least 8 characters.")
+            is_valid = False
         if form_data['password'] != form_data['confirm_password']:
             flash("Passwords do not match.")
             is_valid = False
-        if len(form_data['password']) <= 8:
-            flash("Password must be at least 8 characters.")
-            is_valid = False
+        if len(form_data['password']) <= 0:
+            flash("Cannot leave password field blank.")
         return is_valid
     
     @staticmethod

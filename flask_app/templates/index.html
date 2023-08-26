@@ -15,7 +15,7 @@
   <!-- !   TO DO: FIX UNDER 30 COLUMN - add jinja conditional 'if 0 print no...' -->
   <!-- !   TO DO: FLASH CANT LEAVE FIELDS EMPTY - conditional rendering -->
   <!-- !   TO DO: MAKE IT SO USER CAN ONLY EDIT OR DELETE THEIR OWN RECIPES  -->
-  <!-- ?   DONE: WELCOME LOGGED IN PERSON IN DASHBOARD (WORKING WITH SESSION, IS THERE A MORE PERMANENT WAY?) AND ON VIEW ONE RECIPE  -->
+  <!-- ?   QUESTION: WELCOME LOGGED IN PERSON IN DASHBOARD (WORKING WITH SESSION, IS THERE A MORE PERMANENT WAY?) AND ON VIEW ONE RECIPE  -->
   <!-- !   TO DO: ADD FORM LAYOUT ISSUES  -->
   <!-- !   TO DO: RESTYLE BUTTON  -->
 
@@ -35,13 +35,12 @@
           {% endif %}
       {% endwith %}
     </div>
-    <main class="flx row gap-2">
+    <main class="flx row gap-3">
       <!-- reg form -->
-      <form action="/create/user/submission" method="post" class="container flx col gap-5" id="sign-up-form">
+      <form action="/create/user/submission" method="post" class="container flx col gap-4" id="sign-up-form">
         <h2>Sign up</h2>
-        
         <div>
-          <label for="first_name">First Name:
+          <label class="flx col gap-2" for="first_name">First Name:
             <div>
               <input type="text" name="first_name" placeholder="your first name...">
             </div>
@@ -49,7 +48,7 @@
         </div>
         
         <div>
-          <label for="last_name">Last Name:
+          <label class="flx col gap-2" for="last_name">Last Name:
             <div>
               <input type="text" name="last_name" placeholder="your last name...">
             </div>
@@ -57,7 +56,7 @@
         </div>
 
         <div>
-          <label for="email">Email:
+          <label class="flx col gap-2" for="email">Email:
             <div>
               <input type="mail" name="email" placeholder="email...">
             </div>
@@ -65,7 +64,7 @@
         </div>
 
         <div>
-          <label for="password">Create password:
+          <label class="flx col gap-2" for="password">Create password:
             <div>
               <input type="password" name="password" placeholder="password...">
             </div>
@@ -73,19 +72,17 @@
         </div>
 
         <div>
-          <label for="confirm_password">Confirm password:
-            <div class="mb-60">
+          <label class="flx col gap-2" for="confirm_password">Confirm password:
+            <div>
               <input type="password" name="confirm_password" placeholder="retype password...">
             </div>
           </label>
         </div>
 
-        <!-- is my user not being saved bc i made inputs type submits into button type submit? -->
         <div>
           <button type="submit">create account
           </button>
-        </div>
-        
+        </div>        
       </form>
 
       <!-- login form -->
@@ -93,7 +90,7 @@
         <h2>Sign-in</h2>
         
         <div>
-          <label for="email">Email:
+          <label class="flx col gap-2" for="email">Email:
             <div>
               <input type="mail" name="email" placeholder="email...">
             </div>
@@ -101,7 +98,7 @@
         </div>
 
         <div>
-          <label for="password">Password:
+          <label class="flx col gap-2" for="password">Password:
             <div>
               <input type="password" name="password" placeholder="password...">
             </div>
@@ -112,10 +109,8 @@
           <button type="submit">login
           </button>
         </div>
-        
-        
-
       </form>
+
     </main>
   </div>
 </body>
