@@ -11,59 +11,71 @@
   <link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Belanosima:wght@400;600;700&family=Fuzzy+Bubbles:wght@400;700&family=Mansalva&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
 
 
+  
+  <div>
+    
+    
     <!-- HEADER START -->
-
+    
+    <h1>Recipe Repo</h1>
     <header>
-      <h1>Welcome {{ session['first_name'] }}!</h1>
+      <h2>Welcome, {{ session['first_name'] }}!</h2>
       <nav>
         <div>
           <a href="/dashboard">back to recipes</a>
         </div>
+        <span>\</span>
         <div>
           <a href="/logout">logout</a>
         </div>
       </nav>
+      
+      
     </header>
-
+    
     <!-- HEADER END -->
 
 
     
     <!-- MAIN START -->
 
-    <main class="flx col gap-3">
+    <main class="index-card-img flx col gap-3">
 
-      <h2>{{ recipe.recipe_name }}</h2>
+      <!-- <h2>{{ recipe.recipe_name }}</h2> -->
       
       <div class="flx row">
+        <h3 class="flx-1" >Recipe: </h3>
+        <p class="flx-3 ml-10" >{{ recipe.recipe_name }}</p>
+      </div>
+
+      <div class="flx row">
         <h3 class="flx-1" >Posted by: </h3>
-        <p class="flx-3" >{{ recipe.creator.first_name }} {{ recipe.creator.last_name }}</p>
+        <p class="flx-3 ml-10" >{{ recipe.creator.first_name }} {{ recipe.creator.last_name }}</p>
       </div>
 
       <div class="flx row">
         <h3 class="flx-1" >description of recipe: </h3>
-        <p class="flx-3" >{{ recipe.recipe_description }}</p>
+        <p class="flx-3 ml-10" >{{ recipe.recipe_description }}</p>
       </div>
       
       <div class="flx row">
         <h3 class="flx-1" >instructions:</h3>
-        <p class="flx-3" >{{ recipe.recipe_instructions }}</p>
+        <p class="flx-3 ml-10" >{{ recipe.recipe_instructions }}</p>
       </div>
 
       <div class="flx row">
         <h3 class="flx-1" >made on:</h3>
-        <p class="flx-3" >{{ recipe.recipe_date }}</p>
+        <p class="flx-3 ml-10" >{{ recipe.recipe_date }}</p>
       </div>
 
       <div class="flx row">
         <h3 class="flx-1" >Under 30 minutes?</h3>
         {% if recipe.under_30 == 1 %}
-        <p class="flx-3" >Yes.</p>
+        <p class="flx-3 ml-10" >Yes.</p>
         {% else %}
-        <p class="flx-3" >No.</p>
+        <p class="flx-3 ml-10" >No.</p>
         {% endif %}
       </div>
     
@@ -71,9 +83,26 @@
     </main>
 
     <!-- MAIN END -->
-
-
+    
   </div>
+
+
+
+  <!-- FOOTER START -->
+
+  <footer>
+    <nav>
+      <div>
+        <a href="/edit/recipe/{{ recipe.id }}">edit</a>
+      </div>
+      <span>\</span>
+      <div>
+        <a href="/delete/recipe/{{ recipe.id }}">delete</a>
+      </div>    
+    </nav>
+  </footer>
+
+  <!-- FOOTER END -->
 
 </body>
 </html>

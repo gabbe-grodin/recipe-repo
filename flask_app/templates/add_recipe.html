@@ -12,17 +12,18 @@
 </head>
 
 <body>
-  <div class="container">
 
 
     <!-- HEADER START -->
 
+    <h1>Recipe Repo</h1>
     <header>
-      <h1>Add your recipe!</h1>
+      <h2>{{ session['first_name'] }}, add your recipe:</h2>
       <nav>
         <div>
           <a href="/dashboard">back to recipes</a>
         </div>
+        \
         <div>
           <a href="/logout">logout</a>
         </div>
@@ -49,13 +50,14 @@
 
     <!-- MAIN START -->
 
-
-    <main> 
+    <main class="index-card-img"> 
 
 
       <!-- FORM START -->
 
       <form class="flx col gap-4" action="/add/recipe/submission" method="post">
+        <!-- <input type="hidden" name="user_id" value="{#{{ session['user_d'] }}#}"> -->
+        
         <div class="flx row">
             <label class="flx-1" for="recipe_name">Name: </label>
             <input class="flx-3" type="text" name="recipe_name" placeholder="your recipe name...">
@@ -110,7 +112,6 @@
 
     <!-- MAIN END -->
 
-  </div>
   
 </body>
 </html>

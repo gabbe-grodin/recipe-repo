@@ -11,20 +11,26 @@
 </head>
 <body>
 
-  <!-- !   TO DO: ERROR: format requires a mapping  -->
-  <!-- !   TO DO: IN VIEW RECIPE ADD JINJA CONDITIONAL 'if 0 print no...' -->
-  <!-- !   TO DO: FLASH CANT LEAVE FIELDS EMPTY - conditional rendering -->
-  <!-- !   TO DO: MAKE IT SO USER CAN ONLY EDIT OR DELETE THEIR OWN RECIPES  -->
+  <!-- !    ADD FLASH MESSAGES CANT LEAVE FIELDS EMPTY IN ADD RECIPE FORM - conditional rendering -->
+  <!-- !    KeyError: 'under_30' (POINTS TO MODEL) WHEN SUBMITTING EMPTY CREATE RECIPE FORM -->
+  <!-- !    MAKE IT SO USER CAN ONLY EDIT OR DELETE THEIR OWN RECIPES  -->
+  <!-- !    HTML VALIDATIONS -->
+  <!-- *    tweaked styling -->
+  <!-- *    protected several routes -->
   <!-- ?   QUESTION: WELCOME LOGGED IN PERSON IN DASHBOARD (WORKING WITH SESSION, IS THERE A MORE PERMANENT WAY?) AND ON VIEW ONE RECIPE  -->
 
 
-  <div class="container" id="index">
+  <div id="index">
     
     <header>
       <h1>Recipe Repo</h1>
     </header>
     
-    <!-- flash errors -->
+
+
+    
+    <!-- FLASH MESSAGES -->
+
     <div class="flx col">
       {% with messages = get_flashed_messages() %}
           {% if messages %}
@@ -34,9 +40,14 @@
           {% endif %}
       {% endwith %}
     </div>
-    <main class="flx row gap-3">
-      <!-- reg form -->
-      <form action="/create/user/submission" method="post" class="container flx col gap-4" id="sign-up-form">
+    <main class="flx row gap-3 index-card-img">
+
+
+
+
+      <!-- REGISTRATION FORM START -->
+
+      <form action="/create/user/submission" method="post" class="container flx col gap-4" >
         <h2>Sign up</h2>
         <div>
           <label class="flx col gap-2" for="first_name">First Name:
@@ -84,8 +95,13 @@
         </div>        
       </form>
 
-      <!-- login form -->
-      <form action="/login/user/submission" method="post" class="container flx col gap-5" id="login-form">
+
+
+
+
+      <!-- LOGIN FORM START -->
+
+      <form action="/login/user/submission" method="post" class="container flx col gap-5">
         <h2>Sign-in</h2>
         
         <div>

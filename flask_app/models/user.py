@@ -32,6 +32,7 @@ class User:
         user_id = connectToMySQL(cls.db).query_db(query, parsed_data)
         print(user_id, "line 33 -------------------------")
         session['user_id'] = user_id
+        session['first_name'] = parsed_data['first_name']
         print("line 35 ------------------")
         session['full_name'] = f"{parsed_data['first_name']} {parsed_data['last_name']}"
         print("line 37 ---------------")
@@ -74,7 +75,7 @@ class User:
         if User.get_one_user_by_email(form_data['email']):
             flash("Email is already in our system. Please try again.")
             is_valid = False
-        if len(form_data['password']) > 0 and len(form_data['password']) <= 8:
+        if len(form_data['password']) > 0 and len(form_data['password']) <= 7:
             flash("Password must be at least 8 characters.")
             is_valid = False
         if form_data['password'] != form_data['confirm_password']:
@@ -91,6 +92,7 @@ class User:
         parsed_data['last_name'] = form_data['last_name']
         parsed_data['email'] = form_data['email']
         parsed_data['password'] = bcrypt.generate_password_hash(form_data['password'])
+        print(parsed_data)
         return parsed_data
     
     @staticmethod
@@ -99,6 +101,7 @@ class User:
         if this_user:
             if bcrypt.check_password_hash(this_user.password, data['password']):
                 session['user_id'] = this_user.id
+                session['first_name'] = this_user.first_name
                 session['full_name'] = f"{this_user.first_name} {this_user.last_name}"
                 return True
             else:

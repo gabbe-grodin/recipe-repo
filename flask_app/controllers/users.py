@@ -3,12 +3,17 @@ from flask import render_template, redirect, request, session, flash
 from flask_app.models.user import User
 
 
-# shows forms
+
+# LOGIN & REGISTRATION FORMS
 @app.route('/')
 def index():
-    return render_template('index.html')
+    if 'user_id' in session:
+        session.clear()
+        return render_template('index.html')
+    else:
+        return render_template('index.html')
 
-# register to create_user
+# CREATE USER
 @app.route('/create/user/submission', methods=['POST'])
 def sign_up_new_user():
     if User.create_user(request.form):
@@ -16,7 +21,7 @@ def sign_up_new_user():
     else:
         return redirect('/')
 
-# login
+# LOGIN POST
 @app.route('/login/user/submission', methods=['POST'])
 def login():
     if User.login_user(request.form):
@@ -24,17 +29,12 @@ def login():
     else:
         return redirect('/')
 
-# table of all users and their recipes
+# READ ALL
 @app.route('/all/users')
 def show_all_users_with_recipes():
     if 'user_id' in session:
         logged_in_user = User.get_one_user_by_id(session['user_id'])
-        # all_users_with_recipes = User.get_all_users_with_recipes()
-        # print(all_users_with_recipes)
-        # return render_template("dash.html", all_users = all_users_with_recipes, logged_in_user = logged_in_user)
-
         return render_template("dash.html", logged_in_user = logged_in_user)
-
     else:
         return redirect("/")
 

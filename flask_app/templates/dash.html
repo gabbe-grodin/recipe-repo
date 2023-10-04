@@ -13,24 +13,35 @@
   <link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Belanosima:wght@400;600;700&family=Fuzzy+Bubbles:wght@400;700&family=Mansalva&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
+
     <!-- HEADER START -->
+
+    <h1>Recipe Repo</h1>
     <header>
-      <h1>Welcome, {{ session['full_name'] }}</h1>
+      <h2>Welcome, {{ session['first_name'] }}!</h2>
       <nav>
         <div>
-          <a href="/add/recipe/form">Create</a>
+          <a href="/add/recipe/form">create</a>
         </div>
+        <span>\</span>
         <div>
           <a href="/logout">logout</a>
         </div>
       </nav>
     </header>
     <!-- HEADER END -->
+
+
+
+
     <!-- MAIN START -->
-    <main>
+
+    <main class="index-card-img">
       <p>All posted recipes:</p>
+
+
       <!-- TABLE START -->
+
       <div class="tableFixHead">
         <table>
           <thead>
@@ -53,7 +64,9 @@
               <td>{{ recipe.creator.first_name }} {{ recipe.creator.last_name }}</td> 
               <td>
                 <a href="/view/recipe/{{ recipe.id }}">view</a>
+                \
                 <a href="/edit/recipe/{{ recipe.id }}">edit</a>
+                \
                 <a href="/delete/recipe/{{ recipe.id }}">delete</a>
               </td>
             </tr>
@@ -62,8 +75,11 @@
         </table>
       </div>
       <!-- TABLE END -->
+
     </main>
     <!-- MAIN END -->
-  </div>
+
+
+
 </body>
 </html>

@@ -3,11 +3,8 @@ from flask import render_template, redirect, request, session, flash
 from flask_app.models.user import User
 from flask_app.models.recipe import Recipe
 
-@app.route('/')
-def home():
-    return render_template('index.html')
 
-# create recipe "/add/recipe/form"
+# CREATE
 @app.route('/add/recipe/form')
 def add_recipe_form():
     data = {"id": session["user_id"]}
@@ -32,27 +29,33 @@ def add_recipe():
 # show one recipe with user
 @app.route("/view/recipe/<int:id>")
 def show_one_recipe_with_user(id):
-    data = {"id": id}
-    one_recipe = Recipe.get_one_recipe_by_id_with_user(data)
-    if one_recipe:
-        return render_template('view_recipe.html', recipe = one_recipe)
+    if 'user_id' not in session:
+        return render_template('index.html')
     else:
-        return redirect('/dashboard')
+        data = {"id": id}
+        one_recipe = Recipe.get_one_recipe_by_id_with_user(data)
+        if one_recipe:
+            return render_template('view_recipe.html', recipe = one_recipe)
+        else:
+            return redirect('/dashboard')
 
 # edit recipe form
 @app.route("/edit/recipe/<int:id>")
 def edit_recipe_form(id):
-    # to get prefilled data into edit form, select something (in this case a recipe or one_recipe) by id then pass into html
-    data = {"id": id}
-    one_recipe = Recipe.get_one_recipe_by_id_with_user(data)
-    print(one_recipe)
-    return render_template('edit_recipe.html', one_recipe = one_recipe)
+    if 'user_id' not in session:
+        return render_template('index.html')
+    else:
+        # to get prefilled data into edit form, select something (in this case a recipe or one_recipe) by id then pass into html
+        data = {"id": id}
+        one_recipe = Recipe.get_one_recipe_by_id_with_user(data)
+        print(one_recipe)
+        return render_template('edit_recipe.html', one_recipe = one_recipe)
     
 # update recipe 
 @app.route("/update/recipe/submission", methods=['POST'])
 def update_recipe_submit():
     Recipe.update_one_recipe_by_id_with_user(request.form)
-    return redirect(f"/edit/recipe/{request.form['id']}")
+    return redirect(f"/view/recipe/{request.form['id']}")
 
 # table of all recipes and their users
 @app.route('/dashboard')
@@ -66,7 +69,7 @@ def show_all_recipes_with_users():
         return redirect("/")
     
 # delete one recipe 
-@app.route("/delete/recipe/<int:id>")
+@app.route("/delete/recipe/<int:id>") # needs to be a post?
 def delete_one_recipe(id):
     data = {"id": id}
     Recipe.delete_one_recipe_by_id(data)

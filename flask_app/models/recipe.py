@@ -26,7 +26,7 @@ class Recipe:
                 "recipe_instructions": form_data["recipe_instructions"],
                 "recipe_date": form_data["recipe_date"],
                 "under_30": form_data["under_30"],
-                "user_id": session["user_id"]}
+                "user_id": session["user_id"]} # because reference to the user is made here, a hidden input is not necessary in submit form. 
         query = """
         INSERT INTO recipes (recipe_name, recipe_description, recipe_instructions, recipe_date, under_30, user_id)
         VALUES (%(recipe_name)s, %(recipe_description)s, %(recipe_instructions)s, %(recipe_date)s, %(under_30)s, %(user_id)s)
