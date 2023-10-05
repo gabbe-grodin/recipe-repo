@@ -28,16 +28,10 @@ def add_recipe():
 
 # show one recipe with user
 @app.route("/view/recipe/<int:id>")
-def show_one_recipe_with_user(id):
-    if 'user_id' not in session:
-        return render_template('index.html')
-    else:
-        data = {"id": id}
-        one_recipe = Recipe.get_one_recipe_by_id_with_user(data)
-        if one_recipe:
-            return render_template('view_recipe.html', recipe = one_recipe)
-        else:
-            return redirect('/dashboard')
+def show_one_recipe_with_creator(id):
+    data = {"id": id}
+    one_recipe = Recipe.get_one_recipe_by_id_with_creator(data)
+    return render_template('view_recipe.html', recipe = one_recipe)
 
 # edit recipe form
 @app.route("/edit/recipe/<int:id>")
@@ -60,8 +54,8 @@ def update_recipe_submit():
 # table of all recipes and their users
 @app.route('/dashboard')
 def show_all_recipes_with_users():
+    logged_in_user = User.get_one_user_by_id(session['user_id'])
     if 'user_id' in session:
-        logged_in_user = User.get_one_user_by_id(session['user_id'])
         all_recipes_with_users = Recipe.get_all_recipes_with_users()
         print(all_recipes_with_users)
         return render_template("dash.html", all_recipes = all_recipes_with_users, logged_in_user = logged_in_user)

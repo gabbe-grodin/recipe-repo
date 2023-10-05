@@ -18,16 +18,18 @@ class User:
         self.updated_at=data['updated_at']
         self.recipes=[]
 
+
+
+
+
     @classmethod
     def create_user(cls,data):
         if not cls.user_validations(data):
             return False
         parsed_data = cls.parse_user_data(data)
         print("---------------------------line 26", parsed_data)
-        query="""
-            INSERT INTO users (first_name, last_name, email, password)
-            VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s)
-            """
+        query= """INSERT INTO users (first_name, last_name, email, password)
+            VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s)"""
         print("--------------------- line 31")
         user_id = connectToMySQL(cls.db).query_db(query, parsed_data)
         print(user_id, "line 33 -------------------------")
@@ -38,19 +40,47 @@ class User:
         print("line 37 ---------------")
         return True
 
+
+
+
+
+
     @classmethod
-    def get_one_user_by_id(cls, data):
-        query = """
-        SELECT * FROM users
-        WHERE id = %(id)s
-        """
+    def get_one_user_by_id(cls, id):
+        query = """SELECT * FROM users
+            WHERE id = %(id)s"""
+        data = {"id": id}
         result=connectToMySQL(cls.db).query_db(query, data)
+        print ("REEEEESSSSUUULLLT:", result)
         if result:
             one_user = cls(result[0])
             return one_user
         else:
             return False
-        
+
+
+
+
+
+    @classmethod
+    def get_one_user_by_email(cls, email):
+        data = {"email": email}
+        query = """SELECT * FROM users
+            WHERE email = %(email)s"""
+        result = connectToMySQL(cls.db).query_db(query, data)
+        if result:
+            one_user = cls(result[0])
+            print("************one_user**********:", one_user)
+            return one_user
+        else:
+            print("User email not found.")
+            return False
+
+
+
+
+
+
     @staticmethod
     def user_validations(form_data):
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
@@ -112,20 +142,27 @@ class User:
             return False
 
     @classmethod
-    def get_one_user_by_email(cls, email):
-        data = {"email": email}
-        query = """
-        SELECT * FROM users
-        WHERE email = %(email)s
-        """
-        result = connectToMySQL(cls.db).query_db(query, data)
-        if result:
-            one_user = cls(result[0])
-            print("User not gettable.")
-            return one_user
-        else:
-            print("User email not found.")
-            return False
+    def get_one_user_with_recipes(cls,data):
+        query="""SELECT * FROM users
+            LEFT JOIN recipes
+            ON user_id=users.id
+            WHERE users.id = %(id)s"""
+        results=connectToMySQL(cls.db).query_db(query,data)
+        user = cls(results[0])
+        for row_from_db in results:
+            recipe_data = {
+                "id": row_from_db["recipes.id"],
+                "recipe_name": row_from_db["recipe_name"],
+                "recipe_description": row_from_db["recipe_description"],
+                "recipe_instructions": row_from_db["recipe_instructions"],
+                "recipe_date": row_from_db["recipe_date"],
+                "under_30": row_from_db["under_30"],
+                "created_at": row_from_db["recipes.created_at"],
+                "updated_at": row_from_db["recipes.updated_at"],
+                "user_id": row_from_db["user_id"]
+            }
+            user.recipes.append(recipe.Recipe[recipe_data])
+        return user
 
     # @classmethod
     # def get_all_users(cls):
@@ -157,30 +194,7 @@ class User:
     #     result=connectToMySQL(cls.db).query_db(query,data)
     #     return result
     
-    # @classmethod
-    # def get_one_user_with_recipes(cls,data):
-    #     query="""
-    #     SELECT * FROM users
-    #     LEFT JOIN recipes
-    #     ON user_id=users.id
-    #     WHERE users.id = %(id)s
-    #     """
-    #     result=connectToMySQL(cls.db).query_db(query,data)
-    #     user = cls(result[0])
-    #     for row_from_db in result:
-    #         recipe_data = {
-    #             "id": row_from_db["recipes.id"],
-    #             "recipe_name": row_from_db["recipe_name"],
-    #             "recipe_description": row_from_db["recipe_description"],
-    #             "recipe_instructions": row_from_db["recipe_instructions"],
-    #             "recipe_date": row_from_db["recipe_date"],
-    #             "under_30": row_from_db["under_30"],
-    #             "created_at": row_from_db["recipes.created_at"],
-    #             "updated_at": row_from_db["recipes.updated_at"],
-    #             "user_id": row_from_db["user_id"]
-    #         }
-    #         user.recipes.append(recipe.Recipe[recipe_data])
-    #     return user
+
 
     # @classmethod
     # def get_all_users_with_recipes(cls):

@@ -36,18 +36,16 @@ class Recipe:
         return result
     
     @classmethod
-    def get_one_recipe_by_id_with_user(cls, data):
-        query = """
-        SELECT * FROM recipes
-        LEFT JOIN users
-        ON user_id = users.id
-        WHERE recipes.id = %(id)s
-        """
+    def get_one_recipe_by_id_with_creator(cls, data):
+        query = """SELECT * FROM recipes
+            LEFT JOIN users
+            ON recipes.user_id = users.id
+            WHERE recipes.id = %(id)s"""
         result=connectToMySQL(cls.db).query_db(query, data)
         print("Result: ")
         pprint.pp(result)
         one_recipe = cls(result[0])
-        # instances of recipe and user...
+        # instances of recipe class and creator...
         for row in result:
             recipe_creator_data = {
                 "id": row["users.id"],
