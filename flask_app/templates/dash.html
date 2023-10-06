@@ -20,13 +20,13 @@
     <header>
       <h2>Welcome, {{ session['first_name'] }}!</h2>
       <nav>
-        <div>
-          <a href="/add/recipe/form">create</a>
-        </div>
+        <h2>
+          <a href="/recipe/new">create</a>
+        </h2>
         <span>\</span>
-        <div>
+        <h2>
           <a href="/logout">logout</a>
-        </div>
+        </h2>
       </nav>
     </header>
     <!-- HEADER END -->
@@ -37,7 +37,9 @@
     <!-- MAIN START -->
 
     <main class="index-card-img">
-      <p>All posted recipes:</p>
+      <p>All recipe posts:</p>
+
+
 
 
       <!-- TABLE START -->
@@ -55,37 +57,49 @@
           <tbody>
             {% for recipe in all_recipes %}
             <tr>
-              <td>{{ recipe.recipe_name }}</td>
+              <td>
+                {{ recipe.recipe_name }}
+              </td>
               {% if recipe.under_30 == 1 %}
-              <td>Yes</td>
+              <td>
+                Yes
+              </td>
               {% elif recipe.under_30 == 0 %}
-              <td>No</td>
+              <td>
+                No
+              </td>
               {% endif %}
-              <td>{{ recipe.creator.first_name }} {{ recipe.creator.last_name }}</td> 
+              <td>
+                {{ recipe.creator.first_name }} {{ recipe.creator.last_name }}
+              </td>
+
               
-              <!-- do this below if session["user_id"] == recipes.creator -->
-              {% if logged_in_user == recipe.creator %}
-                <td>
-                  <a href="/view/recipe/{{ recipe.id }}">view</a>
-                  \
-                  <a href="/edit/recipe/{{ recipe.id }}">edit</a>
-                  \
-                  <a href="/delete/recipe/{{ recipe.id }}">delete</a>
-                </td>
-              {% else %}
-                <td>
-                  <a href="/view/recipe/{{ recipe.id }}">view</a>
-                </td>
-              {% endif %}
+              <!-- !  ACTIONS: comparison conditional of user id and creator with session -->
+              
+              <td>
+                <a href="/view/recipe/{{ recipe.id }}">view</a>
+                {% if session['user_id'] == recipe.creator.id %}
+                \
+                <a href="/edit/recipe/{{ recipe.id }}">edit</a>
+                \
+                <a href="/delete/recipe/{{ recipe.id }}">delete</a>
+                {% endif %}
+              </td>
+                
+              
 
             </tr>
             {% endfor %}
           </tbody>
         </table>
       </div>
+
       <!-- TABLE END -->
 
+
+
     </main>
+
     <!-- MAIN END -->
 
 

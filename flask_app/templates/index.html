@@ -9,23 +9,28 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Belanosima:wght@400;600;700&family=Fuzzy+Bubbles:wght@400;700&family=Mansalva&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
+
+<!-- !    IMPLEMENT RESTFUL ROUTING -->
+<!-- !    in dash.html table head broke. check earlier version for correct code -->
+<!-- !    SIMPLIFY AND ORGANIZE A LA ANDREW (MEANING: COMBINE SOME OF THE CLASSMETHODS FOR REG AND LOGIN) -->
+<!-- !    STYLE BUGS: ENLARGE CARD, SYNC HEADER FOOTER AND NAV SPACING ACROSS TEMPLATES  -->
+<!-- !    ADD FLASH MESSAGES CANT LEAVE FIELDS EMPTY IN ADD RECIPE FORM - conditional rendering -->
+<!-- !    KeyError: 'under_30' (POINTS TO MODEL) WHEN SUBMITTING EMPTY CREATE RECIPE FORM -->
+<!-- !    FORMAT DATE IN TEMPLATE TO VIEW RECIPE (WITH LIBRARY?) -->
+<!-- !    MAKE IT SO USER CAN ONLY EDIT OR DELETE THEIR OWN RECIPES  -->
+<!-- !    ERROR: FORMAT REQUIRES MAPPING DONT PASS REQUEST.FORM BECAUSE THAT GIVES A VALUE NOT A KEY VALUE PAIR OR SOMETHING LIKE THAT -->
+<!-- !    WHY AFTER LOGGING OUT CAN ROUTE TO VIEW ONE RECIPE-->
+<!-- !    HTML VALIDATION -->
+<!-- !    SAVE MWB AND TXT OF ENTIRE DATABASE -->
+<!-- *    tweaked styling -->
+<!-- *    protected several routes -->
+<!-- *    updated tasks to do and those completed -->
+<!-- *    fixed show_one_recipe_with_creator bug -->
+<!-- *    implemented comparison conditional of user id and creator with session in dashboard view -->
+<!-- *    improved dash.html readability with spacing and comments -->
+
 <body>
 
-  <!-- !    IMPLEMENT RESTFUL ROUTING -->
-  <!-- !    SIMPLIFY AND ORGANIZR A LA ANDREW (MEANING: COMBINE SOME OF THE CLASSMETHODS FOR REG AND LOGIN) -->
-  <!-- !    STYLE BUGS: ENLARGE CARD, SYNC HEADER FOOTER AND NAV SPACING ACROSS TEMPLATES  -->
-  <!-- !    ADD FLASH MESSAGES CANT LEAVE FIELDS EMPTY IN ADD RECIPE FORM - conditional rendering -->
-  <!-- !    KeyError: 'under_30' (POINTS TO MODEL) WHEN SUBMITTING EMPTY CREATE RECIPE FORM -->
-  <!-- !    FORMAT DATE IN TEMPLATE TO VIEW RECIPE (WITH LIBRARY?) -->
-  <!-- !    MAKE IT SO USER CAN ONLY EDIT OR DELETE THEIR OWN RECIPES  -->
-  <!-- !    ERROR: FORMAT REQUIRES MAPPING DONT PASS REQUEST.FORM BECAUSE THAT GIVES A VALUE NOT A KEY VALUE PAIR OR SOMETHING LIKE THAT -->
-  <!-- !    WHY AFTER LOGGING OUT CAN ROUTE TO VIEW ONE RECIPE-->
-  <!-- !    HTML VALIDATION -->
-  <!-- !    SAVE MWB AND TXT OF ENTIRE DATABASE -->
-  <!-- *    tweaked styling -->
-  <!-- *    protected several routes -->
-  <!-- *    updated tasks to do and those completed -->
-  <!-- *    fixed show_one_recipe_with_creator bug -->
 
 
   <div id="index">
@@ -48,6 +53,10 @@
           {% endif %}
       {% endwith %}
     </div>
+
+
+    <!-- MAIN START -->
+
     <main class="flx row gap-3 index-card-img">
 
 
@@ -55,10 +64,10 @@
 
       <!-- REGISTRATION FORM START -->
 
-      <form action="/create/user/submission" method="post" class="container flx col gap-4" >
+      <form action="/user/new" method="post" class="flx col gap-3" >
         <h2>Sign up</h2>
         <div>
-          <label class="flx col gap-2" for="first_name">First Name:
+          <label class="flx col gap-1" for="first_name">First Name:
             <div>
               <input type="text" name="first_name" placeholder="your first name...">
             </div>
@@ -66,7 +75,7 @@
         </div>
         
         <div>
-          <label class="flx col gap-2" for="last_name">Last Name:
+          <label class="flx col gap-1" for="last_name">Last Name:
             <div>
               <input type="text" name="last_name" placeholder="your last name...">
             </div>
@@ -74,7 +83,7 @@
         </div>
 
         <div>
-          <label class="flx col gap-2" for="email">Email:
+          <label class="flx col gap-1" for="email">Email:
             <div>
               <input type="mail" name="email" placeholder="email...">
             </div>
@@ -82,7 +91,7 @@
         </div>
 
         <div>
-          <label class="flx col gap-2" for="password">Create password:
+          <label class="flx col gap-1" for="password">Create password:
             <div>
               <input type="password" name="password" placeholder="password...">
             </div>
@@ -90,7 +99,7 @@
         </div>
 
         <div>
-          <label class="flx col gap-2" for="confirm_password">Confirm password:
+          <label class="flx col gap-1" for="confirm_password">Confirm password:
             <div>
               <input type="password" name="confirm_password" placeholder="retype password...">
             </div>
@@ -109,11 +118,11 @@
 
       <!-- LOGIN FORM START -->
 
-      <form action="/login/user/submission" method="post" class="container flx col gap-5">
+      <form action="/login" method="post" class="flx col gap-3">
         <h2>Sign-in</h2>
         
         <div>
-          <label class="flx col gap-2" for="email">Email:
+          <label class="flx col gap-1" for="email">Email:
             <div>
               <input type="mail" name="email" placeholder="email...">
             </div>
@@ -121,7 +130,7 @@
         </div>
 
         <div>
-          <label class="flx col gap-2" for="password">Password:
+          <label class="flx col gap-1" for="password">Password:
             <div>
               <input type="password" name="password" placeholder="password...">
             </div>

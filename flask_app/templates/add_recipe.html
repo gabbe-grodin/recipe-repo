@@ -20,13 +20,13 @@
     <header>
       <h2>{{ session['first_name'] }}, add your recipe:</h2>
       <nav>
-        <div>
+        <h2>
           <a href="/dashboard">back to recipes</a>
-        </div>
+        </h2>
         \
-        <div>
+        <h2>
           <a href="/logout">logout</a>
-        </div>
+        </h2>
       </nav>
     </header>
 
@@ -55,7 +55,7 @@
 
       <!-- FORM START -->
 
-      <form class="flx col gap-4" action="/add/recipe/submission" method="post">
+      <form class="flx col gap-4" action="/recipe" method="post">
         <!-- <input type="hidden" name="user_id" value="{#{{ session['user_d'] }}#}"> -->
         
         <div class="flx row">

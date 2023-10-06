@@ -3,6 +3,7 @@ from flask import session, flash
 from flask_app.models import user, recipe
 from flask_app import app
 import pprint
+from datetime import datetime
 
 class Recipe:
     db = 'recipes'
@@ -45,7 +46,7 @@ class Recipe:
         print("Result: ")
         pprint.pp(result)
         one_recipe = cls(result[0])
-        # instances of recipe class and creator...
+        # instance of recipe class and creator...
         for row in result:
             recipe_creator_data = {
                 "id": row["users.id"],
@@ -62,47 +63,28 @@ class Recipe:
             return False
 
     @classmethod
-    def get_all_recipes_with_users(cls):
-        query="""
-        SELECT * FROM recipes
-        LEFT JOIN users
-        ON recipes.user_id = users.id
-        """
+    def get_all_recipes_with_creators(cls):
+        query="""SELECT * FROM recipes
+            LEFT JOIN users
+            ON recipes.user_id = users.id"""
         results=connectToMySQL(cls.db).query_db(query)
         recipe_creator_list = []
-        # instances of recipe and user...
+        # instances of recipe class and creator...
         for row in results:
             one_recipe = cls(row)
-            user_data = {
-                "id": row["id"],
+            #
+            creator_data = {
+                "id": row["users.id"],
                 "first_name": row["first_name"],
                 "last_name": row["last_name"],
                 "email": row["email"],
                 "password": row["password"],
-                "created_at": row["created_at"],
-                "updated_at": row["updated_at"]}
-            one_recipe.creator = user.User(user_data)
+                "created_at": row["users.created_at"],
+                "updated_at": row["users.updated_at"]}
+            one_recipe.creator = user.User(creator_data)
             recipe_creator_list.append(one_recipe)
         return recipe_creator_list
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -134,25 +116,6 @@ class Recipe:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     # DELETE
     @classmethod
     def delete_one_recipe_by_id(cls, data):
@@ -161,3 +124,13 @@ class Recipe:
         WHERE id = %(id)s
         """
         return connectToMySQL(cls.db).query_db(query, data)
+    
+
+    # https://www.programiz.com/python-programming/datetime/strftime
+    
+    @classmethod
+    def format_date(cls,date_time,output_fmt):
+        tmp_date_time = datetime.strptime(date_time,"%Y-%m-%d %H:%M:%S")
+        output_format = output_fmt
+        date_time_output = tmp_date_time.strftime(output_format)
+        return date_time_output
