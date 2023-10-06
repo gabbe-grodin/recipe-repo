@@ -1,6 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import session, flash
-from flask_app.models import user, recipe
+from flask_app.models import user
 from flask_app import app
 import pprint
 from datetime import datetime
@@ -19,19 +19,37 @@ class Recipe:
         self.user_id = data['user_id']
         self.creator = None
 
+    @staticmethod
+    def validate_recipe(recipe):
+        is_valid = True
+        if len(recipe['recipe_name']) <= 0:
+            flash("Cannot leave 'Name' field empty.")
+            is_valid = False
+        if len(recipe['recipe_description']) <= 0:
+            flash("Cannot leave 'Description' field empty.")
+            is_valid = False
+        if len(recipe['recipe_instructions']) <= 0:
+            flash("Cannot leave 'Instructions' field empty.")
+            is_valid = False
+        if not (recipe['recipe_date']):
+            flash("Must add the date you created this recipe.")
+            is_valid = False
+        return is_valid
+    
+    
+    
     @classmethod
     def create_recipe(cls, form_data):
+        print(form_data)
         recipe_data = {
-                "recipe_name": form_data["recipe_name"],
-                "recipe_description": form_data["recipe_description"],
-                "recipe_instructions": form_data["recipe_instructions"],
-                "recipe_date": form_data["recipe_date"],
-                "under_30": form_data["under_30"],
-                "user_id": session["user_id"]} # because reference to the user is made here, a hidden input is not necessary in submit form. 
-        query = """
-        INSERT INTO recipes (recipe_name, recipe_description, recipe_instructions, recipe_date, under_30, user_id)
-        VALUES (%(recipe_name)s, %(recipe_description)s, %(recipe_instructions)s, %(recipe_date)s, %(under_30)s, %(user_id)s)
-        """
+            "recipe_name": form_data["recipe_name"],
+            "recipe_description": form_data["recipe_description"],
+            "recipe_instructions": form_data["recipe_instructions"],
+            "recipe_date": form_data["recipe_date"],
+            "under_30": form_data["under_30"],
+            "user_id": session["user_id"]} # because reference to the user is made here, a hidden input is not necessary in submit form. 
+        query = """INSERT INTO recipes (recipe_name, recipe_description, recipe_instructions, recipe_date, under_30, user_id)
+            VALUES (%(recipe_name)s, %(recipe_description)s, %(recipe_instructions)s, %(recipe_date)s, %(under_30)s, %(user_id)s)"""
         result = connectToMySQL(cls.db).query_db(query, recipe_data)
         print("Create recipe method in model", result)
         return result

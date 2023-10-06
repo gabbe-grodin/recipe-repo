@@ -22,7 +22,7 @@ def index():
 # CREATE USER FORM
 
 @app.route('/user/new', methods=['POST'])
-def sign_up_new_user():
+def register_user():
     User.create_user(request.form) 
     return redirect('/dashboard')
 
