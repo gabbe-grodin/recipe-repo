@@ -4,18 +4,20 @@ from flask_app.models.user import User
 from flask_app.models.recipe import Recipe
 
 
-# CREATE
+# form
+
 @app.route('/recipe/new')
 def add_recipe_form():
     data = {"id": session["user_id"]}
     # is this the validation this needs?...
-    if 'user_id' in session:
+    if session['user_id']:
         User.get_one_user_by_id(data)
         return render_template('add_recipe.html')
     else:
         return redirect('/')
 
-# create recipe "/recipe/new"
+# create recipe
+
 @app.route('/recipe', methods=['POST'])
 def add_recipe():
     # trying to get value of radio button:
@@ -26,15 +28,17 @@ def add_recipe():
     # return redirect('/dashboard', f"{under_30}")
     return redirect('/dashboard')
 
-# show one recipe with user
-@app.route("/view/recipe/<int:id>")
+# read one recipe with creator
+
+@app.route("/recipe/<int:id>")
 def show_one_recipe_with_creator(id):
     data = {"id": id}
     one_recipe = Recipe.get_one_recipe_by_id_with_creator(data)
     return render_template('view_recipe.html', recipe = one_recipe)
 
 # edit recipe form
-@app.route("/edit/recipe/<int:id>")
+
+@app.route("/recipe/<int:id>/edit")
 def edit_recipe_form(id):
     if 'user_id' not in session:
         return render_template('index.html')
@@ -45,13 +49,21 @@ def edit_recipe_form(id):
         print(one_recipe)
         return render_template('edit_recipe.html', one_recipe = one_recipe)
     
+
+
+
 # update recipe 
-@app.route("/update/recipe/submission", methods=['POST'])
+
+@app.route("/recipe/update", methods=['POST'])
 def update_recipe_submit():
     Recipe.update_one_recipe_by_id_with_user(request.form)
-    return redirect(f"/view/recipe/{request.form['id']}")
+    return redirect(f"/recipe/{request.form['id']}")
+
+
+
 
 # table of all recipes and their creators
+
 @app.route('/dashboard')
 def show_all_recipes_with_creators():
     # logged_in_user = User.get_one_user_by_id(session['user_id'])
@@ -60,6 +72,9 @@ def show_all_recipes_with_creators():
         return render_template("dash.html", all_recipes = all_recipes_with_creators)
     # else:
     #     return redirect("/")
+    
+
+
     
 # delete one recipe 
 @app.route("/delete/recipe/<int:id>") # needs to be a post?

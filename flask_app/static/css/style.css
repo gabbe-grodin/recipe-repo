@@ -140,7 +140,7 @@ LAYOUT
 ============================
 */
 body {
-  width: 750px;
+  width: 785px;
   margin:30px auto;
   display: flex;
   flex-direction: column;
@@ -304,8 +304,9 @@ table a {
 }
 th,
 td {
-  padding: 8px 2px;
+  padding: 8px 4px;
   letter-spacing: normal;
+  line-height: 1.25rem;
 }
 
 

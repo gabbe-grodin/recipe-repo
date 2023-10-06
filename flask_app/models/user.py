@@ -6,6 +6,8 @@ from flask_app import app
 bcrypt = Bcrypt(app)
 import re
 
+
+
 class User:
     db = 'recipes'
     def __init__(self,data):
@@ -21,43 +23,32 @@ class User:
 
 
 
-
     @classmethod
     def create_user(cls,data):
         if not cls.user_validations(data):
             return False
         parsed_data = cls.parse_user_data(data)
-        print("---------------------------line 26", parsed_data)
         query= """INSERT INTO users (first_name, last_name, email, password)
             VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s)"""
-        print("--------------------- line 31")
         user_id = connectToMySQL(cls.db).query_db(query, parsed_data)
-        print(user_id, "line 33 -------------------------")
         session['user_id'] = user_id
         session['first_name'] = parsed_data['first_name']
-        print("line 35 ------------------")
         session['full_name'] = f"{parsed_data['first_name']} {parsed_data['last_name']}"
-        print("line 37 ---------------")
         return True
 
 
 
 
-
-
     @classmethod
-    def get_one_user_by_id(cls, id):
+    def get_one_user_by_id(cls, data):
         query = """SELECT * FROM users
             WHERE id = %(id)s"""
-        data = {"id": id}
         result=connectToMySQL(cls.db).query_db(query, data)
-        print ("REEEEESSSSUUULLLT:", result)
         if result:
             one_user = cls(result[0])
             return one_user
         else:
             return False
-
 
 
 
@@ -70,13 +61,10 @@ class User:
         result = connectToMySQL(cls.db).query_db(query, data)
         if result:
             one_user = cls(result[0])
-            print("************one_user**********:", one_user)
             return one_user
         else:
             print("User email not found.")
             return False
-
-
 
 
 
@@ -114,7 +102,10 @@ class User:
         if len(form_data['password']) <= 0:
             flash("Cannot leave password field blank.")
         return is_valid
-    
+
+
+
+
     @staticmethod
     def parse_user_data(form_data):
         parsed_data = {}
@@ -124,7 +115,10 @@ class User:
         parsed_data['password'] = bcrypt.generate_password_hash(form_data['password'])
         print(parsed_data)
         return parsed_data
-    
+
+
+
+
     @staticmethod
     def login_user(data):
         this_user = User.get_one_user_by_email(data['email'])
@@ -140,6 +134,9 @@ class User:
         else:
             flash("Your login failed.")
             return False
+
+
+
 
     @classmethod
     def get_one_user_with_recipes(cls,data):
@@ -163,6 +160,9 @@ class User:
             }
             user.recipes.append(recipe.Recipe[recipe_data])
         return user
+
+
+
 
     # @classmethod
     # def get_all_users(cls):

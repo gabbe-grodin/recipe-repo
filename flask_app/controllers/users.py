@@ -12,7 +12,6 @@ from flask_app.models.user import User
 def index():
     if 'user_id' in session: # doing this so if i go back a page in my browser i get logged out and cant loggin as a new user while still in session
         session.clear()
-        # return render_template('index.html')
         return redirect('/logout')
     else:
         return render_template('index.html')
@@ -23,8 +22,7 @@ def index():
 # CREATE USER FORM
 
 @app.route('/user/new', methods=['POST'])
-def sign_up_new_user(): #format requires mapping error happens here
-    # pass in data dict instead
+def sign_up_new_user():
     User.create_user(request.form) 
     return redirect('/dashboard')
 

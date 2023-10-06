@@ -77,10 +77,10 @@
               <!-- !  ACTIONS: comparison conditional of user id and creator with session -->
               
               <td>
-                <a href="/view/recipe/{{ recipe.id }}">view</a>
+                <a href="/recipe/{{ recipe.id }}">view</a>
                 {% if session['user_id'] == recipe.creator.id %}
                 \
-                <a href="/edit/recipe/{{ recipe.id }}">edit</a>
+                <a href="/recipe/{{ recipe.id }}/edit">edit</a>
                 \
                 <a href="/delete/recipe/{{ recipe.id }}">delete</a>
                 {% endif %}
